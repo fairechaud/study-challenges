@@ -9,24 +9,26 @@ int main()
     std::string evens;
     int oddSum;
 
-    for (int i = 0; i < card.size(); i++)
+    for (int i = card.size()-1; i >= 0; i--)
     {
-        if(i%2==0){
-            evens += (int)card.at(i);
+        if(i%2!=0){
+            evens += card.at(i);
         }else{
             oddSum += card.at(i) - '0';
+            std::cout << oddSum << std::endl;
         }
     }
-
+    std::cout << evens << std::endl;
+    std::cout << oddSum << std::endl;
     std::cout << step3(step1(evens),oddSum) << std::endl;
     return 0;
 }
 
 int step1(std::string &evens){
     int sum;
-    for (char even : evens)
+    for (int i = evens.size()-1; i >=0; i--)
     {
-        int temp = (even-'0')*2;
+        int temp = (evens[i]-'0')*2;
         if (temp > 10)
         {
             sum = 10 + temp%10;
