@@ -1,50 +1,43 @@
 #include <iostream>
 
-int step1(std::string &evens);
-std::string step3(int evens, int odds);
+int getDigit(int);
+int sumEvens(std::string);
+int sumOdds(std::string);
 
 int main()
 {
     std::string card = "4111111111111111";
-    std::string evens;
-    int oddSum;
+    int result = 0;
 
-    for (int i = card.size()-1; i >= 0; i--)
-    {
-        if(i%2!=0){
-            evens += card.at(i);
-        }else{
-            oddSum += card.at(i) - '0';
-            std::cout << oddSum << std::endl;
-        }
+    result = sumEvens(card) + sumOdds(card);
+    if (result % 10 == 0){
+        std::cout << "valid card\n";
+    }else{
+        std::cout << "invalid card\n";
     }
-    std::cout << evens << std::endl;
-    std::cout << oddSum << std::endl;
-    std::cout << step3(step1(evens),oddSum) << std::endl;
     return 0;
 }
 
-int step1(std::string &evens){
-    int sum;
-    for (int i = evens.size()-1; i >=0; i--)
+int getDigit(int digit){
+    return digit % 10 + (digit / 10 % 10);
+}
+
+int sumEvens(std::string card)
+{
+    int sum = 0;
+    for(int i = card.size() - 2; i >= 0; i-=2)
     {
-        int temp = (evens[i]-'0')*2;
-        if (temp > 10)
-        {
-            sum = 10 + temp%10;
-        }else{
-            sum+=temp;
-        };
+        sum += getDigit((card[i] - '0')*2);
     }
     return sum;
 }
 
-std::string step3(int evens, int odds)
+int sumOdds(std::string card)
 {
-    int result = (evens+odds)%10;
-    if(result == 0)
+    int sum = 0;
+    for(int i = card.size() - 1; i >= 0; i-=2)
     {
-        return "credit card is correct";
+        sum += card[i] - '0';
     }
-    return "invalid card";
+    return sum;
 }
