@@ -24,5 +24,5 @@ def binary_search(array, target):
     return -1
 
 
-array = [0,1,2,4,5,7,10,23,42,56,70,90,200,500,560,567,589,900]
-print(binary_search(array,200))
+array = [1,1]
+print(binary_search(array,2))
